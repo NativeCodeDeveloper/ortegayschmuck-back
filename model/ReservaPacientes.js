@@ -159,25 +159,40 @@ export default class ReservaPacientes {
         }
     }
 
-//DEVUELVE UN VALOR booleano PARA EVALUAR SI LAS HORAS MEDICAS SE SUPERPONEN
+//DEVUELVE UN VALOR booleano PARA EVALUAR SI LAS HORAS MEDICAS SE SUPERPONEN CON RESERVAS O BLOQUEOS
     async validarDisponibilidadBoolean(fechaInicio, horaInicio, fechaFinalizacion, horaFinalizacion, id_profesional) {
         const conexion = DataBase.getInstance();
 
         const query = `
-         SELECT COUNT(*) AS cnt
-        FROM reservaPacientes
-        WHERE id_profesional = ?
-        AND NOT (
-          TIMESTAMP(fechaFinalizacion, horaFinalizacion) <= TIMESTAMP(?, ?)
-          OR TIMESTAMP(fechaInicio, horaInicio) >= TIMESTAMP(?, ?)
-        )
+  SELECT COUNT(*) AS cnt FROM (
+    SELECT id_reserva AS id
+    FROM reservaPacientes
+    WHERE id_profesional = ?
+    AND estadoPeticion <> 0
+    AND NOT (
+      TIMESTAMP(fechaFinalizacion, horaFinalizacion) <= TIMESTAMP(?, ?)
+      OR TIMESTAMP(fechaInicio, horaInicio) >= TIMESTAMP(?, ?)
+    )
+    UNION ALL
+    SELECT id_bloqueo AS id
+    FROM bloqueoAgenda
+    WHERE id_profesional = ?
+    AND estado_bloqueoAgenda <> 0
+    AND NOT (
+      TIMESTAMP(fechaFinalizacion, horaFinalizacion) <= TIMESTAMP(?, ?)
+      OR TIMESTAMP(fechaInicio, horaInicio) >= TIMESTAMP(?, ?)
+    )
+  ) AS conflictos
     `;
 
-        const params = [id_profesional, fechaInicio, horaInicio, fechaFinalizacion, horaFinalizacion];
+        const params = [
+            id_profesional, fechaInicio, horaInicio, fechaFinalizacion, horaFinalizacion,
+            id_profesional, fechaInicio, horaInicio, fechaFinalizacion, horaFinalizacion
+        ];
         const filas = await conexion.ejecutarQuery(query, params);
 
         const cnt = Array.isArray(filas) ? filas[0].cnt : filas.cnt;
-        return cnt === 0; // true = disponible
+        return cnt === 0; // true = disponible, false = hay conflicto con reserva o bloqueo
     }
 
 

@@ -52,6 +52,8 @@ Content-Type: application/json
 
 
 
+### GET request to example server
+GET http://localhost:3001/bloqueoAgenda/seleccionarTodos
 
 
 

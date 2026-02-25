@@ -68,7 +68,7 @@ export default class BloqueoAgenda {
     async seleccionarBloqueoPorProfesionalModel(id_profesional) {
         try {
             const conexion = DataBase.getInstance();
-            const query = 'SELECT * FROM bloqueoAgenda WHERE id_profesional = ? AND estado_bloqueoAgenda <> 0';
+            const query = '  SELECT b.*, p.nombreProfesional FROM bloqueoAgenda b INNER JOIN profesionales p ON b.id_profesional = p.id_profesional WHERE b.id_profesional = ? AND b.estado_bloqueoAgenda <> 0';
             const params = [id_profesional];
 
             const respuestaCosulta = await conexion.ejecutarQuery(query, params);
@@ -96,5 +96,20 @@ export default class BloqueoAgenda {
             throw error;
         }
     }
+
+
+    async seleccionarTodosLosBloqueos() {
+        try {
+            const conexion = DataBase.getInstance();
+            const query = 'SELECT b.*, p.nombreProfesional FROM bloqueoAgenda b INNER JOIN profesionales p ON b.id_profesional = p.id_profesional WHERE b.estado_bloqueoAgenda <> 0 AND p.estado_Profesional <> 0';
+            const respuestaCosulta = await conexion.ejecutarQuery(query);
+            if (respuestaCosulta) {
+                return respuestaCosulta;
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
 
 }

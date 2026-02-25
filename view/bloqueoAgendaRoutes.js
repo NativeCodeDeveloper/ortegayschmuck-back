@@ -7,6 +7,7 @@ router.post('/InsertarBloqueo', BloqueoAgendaController.InsertarBloqueoControlle
 router.post('/eliminarBloqueo', BloqueoAgendaController.eliminarBloqueoController);
 router.post('/seleccionarBloqueosPorProfesional', BloqueoAgendaController.seleccionarBloqueosPorProfesional);
 router.post('/seleccionarBloqueosEntreFechas', BloqueoAgendaController.seleccionarBloqueosEntreFechasController);
+router.get('/seleccionarTodos', BloqueoAgendaController.seleccionarTodosLosBloqueosController);
 
 
 

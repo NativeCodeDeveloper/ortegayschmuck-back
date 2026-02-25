@@ -89,4 +89,20 @@ export default class BloqueoAgendaController {
         }
     }
 
+
+
+
+
+
+    static async seleccionarTodosLosBloqueosController(req, res) {
+        try {
+            const BloqueoAgendaClass = new BloqueoAgenda();
+            const respuestaModel = await BloqueoAgendaClass.seleccionarTodosLosBloqueos();
+            if(respuestaModel){
+                return res.status(200).send(respuestaModel);
+            }
+        }catch(err){
+            return res.status(400).send({message : "serverError"});
+        }
+    }
 }
