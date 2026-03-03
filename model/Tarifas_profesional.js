@@ -151,4 +151,41 @@ export default class Tarifas_profesional {
 
 
 
+
+    //FUNCION PARA SELECCIONAR TODAS LAS TARIFAS PROFESIONALES
+    async seleccionarTarifasProfesionalesConNombresPor_id_profesional(profesional_id) {
+        try {
+            const conexion = DataBase.getInstance();
+            const query = `                                                                                                                                                                                             
+  SELECT                                                                                                                                                                                   
+      tarifa.*,
+      profesional.nombreProfesional,                                                                                                                                                       
+      servicio.nombreServicio                                                                                                                                                            
+  FROM tarifas_profesional AS tarifa                                                                                                                                                      
+  INNER JOIN profesionales AS profesional
+      ON tarifa.profesional_id = profesional.id_profesional
+  INNER JOIN serviciosProfesionales AS servicio
+      ON tarifa.servicio_id = servicio.id_servicioProfesional
+  WHERE tarifa.profesional_id = ?
+      AND tarifa.estado_tarifas_profesional <> 0
+      AND profesional.estado_Profesional <> 0
+      AND servicio.estado_Servicio <> 0
+      `;
+            const params = [profesional_id];
+
+            const resultado = await conexion.ejecutarQuery(query, params);
+
+            if (resultado) {
+                return resultado;
+            } else {
+                return resultado;
+            }
+
+        } catch (error) {
+            throw error;
+        }
+    }
+
+
+
 }

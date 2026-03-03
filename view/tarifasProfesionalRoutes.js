@@ -4,6 +4,7 @@ import TarifasProfesionalController from '../controller/TarifasProfesionalContro
 const router = Router();
 
 router.post('/insertarTarifaProfesional', TarifasProfesionalController.insertarTarifaProfesionalController);
+router.post('/seleccionarTarifaProfesional', TarifasProfesionalController.seleccionarTarifasPorProfesional);
 router.post('/actualizarTarifaProfesional', TarifasProfesionalController.actualizarTarifaProfesionalController);
 router.post('/seleccionarTarifaProfesional', TarifasProfesionalController.seleccionarTarifaProfesionalController);
 router.post('/eliminarTarifaProfesional', TarifasProfesionalController.eliminarTarifaProfesionalController);

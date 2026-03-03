@@ -30,7 +30,7 @@ POST http://localhost:3001/tarifasProfesional/seleccionarTarifaProfesional
 Content-Type: application/json
 
 {
-  "id_tarifaProfesional": 3
+  "profesional_id": 2
 }
 
 

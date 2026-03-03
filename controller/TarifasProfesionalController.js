@@ -118,4 +118,27 @@ export default class TarifasProfesionalController {
         }
     }
 
+
+
+
+    //FUNCION PARA SELECCIONAR POR ID UNA TARIFA PROFESIONAL
+    static async seleccionarTarifasPorProfesional(req, res) {
+        try{
+            const {profesional_id} = req.body;
+            if (!profesional_id) {
+                return res.status(400).json({ message: "sindata" });
+            }
+            const tarifaClass = new Tarifas_profesional();
+            const resultado = await tarifaClass.seleccionarTarifasProfesionalesConNombresPor_id_profesional(profesional_id);
+
+            if (resultado) {
+                res.status(200).json(resultado);
+            }else {
+                res.status(500).json({ message: false });
+            }
+        }catch (error) {
+            res.status(500).json({ message: "serverError" });
+        }
+    }
+
 }
