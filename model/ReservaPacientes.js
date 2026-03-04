@@ -309,11 +309,11 @@ SELECT COUNT(*) AS cnt FROM (
 
 
     //METODO PARA SELECCIONAR TODAS LAS CITAS MEDICAS por id_profesional
-    async seleccionarFichasReservadasPreference(id_profesional) {
+    async seleccionarFichasReservadasPreference(preference_id) {
         try {
             const conexion = DataBase.getInstance();
-            const query = "SELECT * FROM reservaPacientes WHERE id_profesional = ? AND estadoPeticion <> 0"
-            const param = [id_profesional];
+            const query = "SELECT * FROM reservaPacientes WHERE preference_id = ? AND estadoPeticion <> 0"
+            const param = [preference_id];
             const resultadoQuery = await conexion.ejecutarQuery(query, param);
 
             if (resultadoQuery) {
@@ -337,7 +337,7 @@ SELECT COUNT(*) AS cnt FROM (
         try {
             const conexion = DataBase.getInstance();
             const query = "SELECT * FROM reservaPacientes WHERE preference_id = ? AND estadoPeticion <> 0"
-            const param = [preference_id];
+            const param = [id_pro];
             const resultadoQuery = await conexion.ejecutarQuery(query, param);
 
             if (resultadoQuery) {

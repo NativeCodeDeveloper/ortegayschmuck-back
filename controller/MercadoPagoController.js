@@ -210,6 +210,11 @@ export const recibirPago = async (req, res) => {
             console.log("-----------------------------------------");
             console.log("");
 
+            if (!pagoAprobado) {
+                console.log("--------> PAGO NO APROBADO para preference_id:", preference_id);
+                return res.status(200).json({ received: true, pago_aprobado: false });
+            }
+
             try {
                 // --- CAMBIAR ESTADO DE LA RESERVA A "reservada" ---
                 const reservaPacientesClass = new ReservaPacientes();
