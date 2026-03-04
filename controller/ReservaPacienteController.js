@@ -311,6 +311,37 @@ export default class ReservaPacienteController {
                 if (resultadoQuery.affectedRows > 0) {
                     // Enviar correo de confirmación (no bloquear la respuesta si falla)
 
+                    try {
+                        await NotificacionAgendamiento.enviarCorreoConfirmacionReserva({
+                            to: email,
+                            nombrePaciente,
+                            apellidoPaciente,
+                            rut,
+                            telefono,
+                            fechaInicio,
+                            horaInicio,
+                            fechaFinalizacion,
+                            horaFinalizacion,
+                            estadoReserva,
+                            id_reserva: resultadoQuery.insertId
+                        });
+                    } catch (err) {
+                        console.error("[MAIL] Error:", err.message);
+                    }
+
+
+                    // Enviar correo de notificación al equipo
+                    NotificacionAgendamiento.enviarCorreoConfirmacionEquipo({
+                        nombrePaciente,
+                        apellidoPaciente,
+                        fechaInicio,
+                        horaInicio,
+                        accion: "AGENDADA",
+                        id_reserva: resultadoQuery.insertId
+                    }).catch(err => {
+                        console.error("[MAIL EQUIPO] Error:", err.message);
+                    });
+
 
                     return res.status(200).send({message: true})
                 } else {
@@ -444,7 +475,7 @@ export default class ReservaPacienteController {
             }
 
             const claseReservaPaciente = new ReservaPacientes();
-            const resultadoQuery = await claseReservaPaciente.seleccionarFichasReservadasPreference(id_profesional)
+            const resultadoQuery = await claseReservaPaciente.seleccionarFichasReservadas_id_profesional(id_profesional)
 
             if (resultadoQuery) {
                 return res.status(200).json(resultadoQuery);

@@ -47,6 +47,15 @@ GET http://localhost:3001/reservaPacientes/seleccionarReservados
 
 
 
+### POST // FUNCION PARA INSERTAR NUEVA PORTADA
+POST http://localhost:3001/reservaPacientes/seleccionarPorProfesional
+Content-Type: application/json
+
+{
+  "id_profesional": 4
+}
+
+
 
 
 

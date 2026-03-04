@@ -350,11 +350,6 @@ SELECT COUNT(*) AS cnt FROM (
         }
     }
 
-
-
-
-
-
     /*
 
     =====> cambiarReservaPagadaVisible(preference_id) <=======
@@ -380,5 +375,22 @@ SELECT COUNT(*) AS cnt FROM (
     }
 
 
+
+    async seleccionarFichasReservadas_id_profesional(id_profesional) {
+        try {
+            const conexion = DataBase.getInstance();
+            const query = "SELECT * FROM reservaPacientes WHERE id_profesional = ? AND estadoPeticion <> 0"
+            const param = [id_profesional];
+            const resultadoQuery = await conexion.ejecutarQuery(query, param);
+
+            if (resultadoQuery) {
+                return resultadoQuery;
+            }
+
+        } catch (error) {
+            console.log(error);
+            throw new Error(error);
+        }
+    }
 
 }

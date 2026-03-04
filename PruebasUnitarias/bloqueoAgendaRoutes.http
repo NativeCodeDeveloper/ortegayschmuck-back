@@ -32,7 +32,7 @@ POST http://localhost:3001/bloqueoAgenda/seleccionarBloqueosPorProfesional
 Content-Type: application/json
 
   {
-    "id_profesional": 1
+    "id_profesional": 13
   }
 
 
