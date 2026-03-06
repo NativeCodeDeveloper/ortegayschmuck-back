@@ -48,6 +48,8 @@ export default class TarifasProfesionalController {
     static async seleccionarTarifaProfesionalController(req, res) {
         try{
             const { id_tarifaProfesional } = req.body;
+            console.log(req.body)
+
             if (!id_tarifaProfesional) {
                 return res.status(400).json({ message: "sindata" });
             }

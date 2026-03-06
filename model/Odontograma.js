@@ -111,6 +111,8 @@ export default class Odontograma {
                 movilidad = ?, sondaje_mm = ?, sangrado_sondaje = ?, placa_bacteriana = ?,
                 caries_activa = ?, obturacion = ?, endodoncia = ?, implante = ?,
                 corona = ?, fractura = ?, lesion_periapical = ?, reabsorcion = ?,
+                pieza_extraida = ?, extraccion_indicada = ?, extraida_ortodoncia = ?,
+                indicada_ortodoncia = ?, indicada_sellante = ?, pieza_faltante = ?, pieza_sana = ?,
                 fecha_actualizacion = NOW(), usuario_actualizacion = ?
                 WHERE id_odontograma = ? AND numero_diente = ?`;
 
@@ -121,6 +123,8 @@ export default class Odontograma {
                 datos.movilidad, datos.sondaje_mm, datos.sangrado_sondaje, datos.placa_bacteriana,
                 datos.caries_activa, datos.obturacion, datos.endodoncia, datos.implante,
                 datos.corona, datos.fractura, datos.lesion_periapical, datos.reabsorcion,
+                datos.pieza_extraida, datos.extraccion_indicada, datos.extraida_ortodoncia,
+                datos.indicada_ortodoncia, datos.indicada_sellante, datos.pieza_faltante, datos.pieza_sana,
                 datos.usuario_actualizacion,
                 id_odontograma, numero_diente
             ];
@@ -146,8 +150,10 @@ export default class Odontograma {
                           movilidad, sondaje_mm, sangrado_sondaje, placa_bacteriana,
                           caries_activa, obturacion, endodoncia, implante,
                           corona, fractura, lesion_periapical, reabsorcion,
+                          pieza_extraida, extraccion_indicada, extraida_ortodoncia,
+                          indicada_ortodoncia, indicada_sellante, pieza_faltante, pieza_sana,
                           fecha_registro, usuario_registro)
-                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)`;
+                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)`;
 
             const param = [
                 id_odontograma, numero_diente,
@@ -157,6 +163,8 @@ export default class Odontograma {
                 datos.movilidad || 0, datos.sondaje_mm || 0, datos.sangrado_sondaje || 0, datos.placa_bacteriana || 0,
                 datos.caries_activa || 0, datos.obturacion || 0, datos.endodoncia || 0, datos.implante || 0,
                 datos.corona || 0, datos.fractura || 0, datos.lesion_periapical || 0, datos.reabsorcion || 0,
+                datos.pieza_extraida || 0, datos.extraccion_indicada || 0, datos.extraida_ortodoncia || 0,
+                datos.indicada_ortodoncia || 0, datos.indicada_sellante || 0, datos.pieza_faltante || 0, datos.pieza_sana || 0,
                 datos.usuario_registro || null
             ];
 

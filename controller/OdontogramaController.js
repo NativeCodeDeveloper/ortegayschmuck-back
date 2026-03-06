@@ -26,8 +26,7 @@ export default class OdontogramaController{
 
                     const tieneAlgo =
                         surfaces.V || surfaces.L || surfaces.M || surfaces.D || surfaces.O ||
-                        wholeTooth.absent || wholeTooth.restoRadicular ||
-                        wholeTooth.protesisFija || wholeTooth.prosthesisExisting;
+                        Object.values(wholeTooth).some(Boolean);
 
                     if (tieneAlgo) {
                         await modelo.insertarDiente(id_odontograma, parseInt(numeroDiente), {
@@ -35,6 +34,14 @@ export default class OdontogramaController{
                             resto_radicular: wholeTooth.restoRadicular ? 1 : 0,
                             protesis_fija: wholeTooth.protesisFija ? 1 : 0,
                             protesis_existente: wholeTooth.prosthesisExisting ? 1 : 0,
+                            corona: wholeTooth.corona ? 1 : 0,
+                            pieza_extraida: wholeTooth.piezaExtraida ? 1 : 0,
+                            extraccion_indicada: wholeTooth.extraccionIndicada ? 1 : 0,
+                            extraida_ortodoncia: wholeTooth.extraidaOrtodoncia ? 1 : 0,
+                            indicada_ortodoncia: wholeTooth.indicadaOrtodoncia ? 1 : 0,
+                            indicada_sellante: wholeTooth.indicadaSellante ? 1 : 0,
+                            pieza_faltante: wholeTooth.piezaFaltante ? 1 : 0,
+                            pieza_sana: wholeTooth.piezaSana ? 1 : 0,
                             cara_V: surfaces.V || null,
                             cara_L: surfaces.L || null,
                             cara_M: surfaces.M || null,
@@ -130,6 +137,13 @@ export default class OdontogramaController{
                 fractura: datos.fractura ? 1 : 0,
                 lesion_periapical: datos.lesion_periapical ? 1 : 0,
                 reabsorcion: datos.reabsorcion ? 1 : 0,
+                pieza_extraida: datos.pieza_extraida ? 1 : 0,
+                extraccion_indicada: datos.extraccion_indicada ? 1 : 0,
+                extraida_ortodoncia: datos.extraida_ortodoncia ? 1 : 0,
+                indicada_ortodoncia: datos.indicada_ortodoncia ? 1 : 0,
+                indicada_sellante: datos.indicada_sellante ? 1 : 0,
+                pieza_faltante: datos.pieza_faltante ? 1 : 0,
+                pieza_sana: datos.pieza_sana ? 1 : 0,
                 usuario_actualizacion: datos.usuario_actualizacion || null,
             };
 

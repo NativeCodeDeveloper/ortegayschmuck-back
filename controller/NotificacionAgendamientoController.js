@@ -18,6 +18,8 @@ export default class NotificacionAgendamientoController {
         horaInicio
       } = req.query;
 
+      const empresa = process.env.NOMBRE_EMPRESA || "Clinica";
+
       if (!id_reserva || !nombrePaciente || !apellidoPaciente || !fechaInicio || !horaInicio) {
         return res.status(400).json({
           ok: false,
@@ -33,7 +35,7 @@ export default class NotificacionAgendamientoController {
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Confirmar Cita - Silueta Chic</title>
+          <title>Confirmar Cita - ${empresa}</title>
           <style>
             body {
               font-family: Arial, sans-serif;
@@ -126,6 +128,8 @@ export default class NotificacionAgendamientoController {
         horaInicio
       } = req.body;
 
+      const empresa = process.env.NOMBRE_EMPRESA || "Clinica";
+
       if (!id_reserva || !nombrePaciente || !apellidoPaciente || !fechaInicio || !horaInicio) {
         return res.status(400).json({
           ok: false,
@@ -187,10 +191,10 @@ export default class NotificacionAgendamientoController {
                 <div class="icon">✅</div>
                 <h1>¡Cita Confirmada!</h1>
                 <p><strong>${nombrePaciente} ${apellidoPaciente}</strong></p>
-                <p>Tu cita para el <strong>${fechaInicio}</strong> a las <strong>${horaInicio}</strong> ha sido confirmada exitosamente.</p>
-                <p>Hemos notificado a nuestro equipo de tu confirmación.</p>
+                <p>Tu cita para el <strong>${new Date(fechaInicio).toLocaleDateString("es-CL", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</strong> a las <strong>${horaInicio}</strong> ha sido confirmada exitosamente.</p>
+                <p>Hemos notificado a nuestro equipo de tu confirmacion.</p>
                 <p style="margin-top: 30px; color: #6b7280; font-size: 14px;">
-                  Nos vemos pronto en Silueta Chic 💜
+                  Nos vemos pronto en ${empresa}.
                 </p>
               </div>
             </body>
@@ -205,7 +209,7 @@ export default class NotificacionAgendamientoController {
             <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Error - Silueta Chic</title>
+              <title>Error - ${empresa}</title>
               <style>
                 body {
                   font-family: Arial, sans-serif;
@@ -277,6 +281,8 @@ export default class NotificacionAgendamientoController {
         horaInicio
       } = req.query;
 
+      const empresa = process.env.NOMBRE_EMPRESA || "Clinica";
+
       if (!id_reserva || !nombrePaciente || !apellidoPaciente || !fechaInicio || !horaInicio) {
         return res.status(400).json({
           ok: false,
@@ -291,7 +297,7 @@ export default class NotificacionAgendamientoController {
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Cancelar Cita - Silueta Chic</title>
+          <title>Cancelar Cita - ${empresa}</title>
           <style>
             body {
               font-family: Arial, sans-serif;
@@ -397,6 +403,8 @@ export default class NotificacionAgendamientoController {
         horaInicio
       } = req.body;
 
+      const empresa = process.env.NOMBRE_EMPRESA || "Clinica";
+
       if (!id_reserva || !nombrePaciente || !apellidoPaciente || !fechaInicio || !horaInicio) {
         return res.status(400).json({
           ok: false,
@@ -458,10 +466,10 @@ export default class NotificacionAgendamientoController {
                 <div class="icon">❌</div>
                 <h1>Cita Cancelada</h1>
                 <p><strong>${nombrePaciente} ${apellidoPaciente}</strong></p>
-                <p>Tu cita para el <strong>${fechaInicio}</strong> a las <strong>${horaInicio}</strong> ha sido cancelada.</p>
-                <p>Hemos notificado a nuestro equipo de tu cancelación.</p>
+                <p>Tu cita para el <strong>${new Date(fechaInicio).toLocaleDateString("es-CL", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</strong> a las <strong>${horaInicio}</strong> ha sido cancelada.</p>
+                <p>Hemos notificado a nuestro equipo de tu cancelacion.</p>
                 <p style="margin-top: 30px; color: #6b7280; font-size: 14px;">
-                  Esperamos verte pronto en Silueta Chic 💜
+                  Esperamos verte pronto en ${empresa}.
                 </p>
               </div>
             </body>
@@ -476,7 +484,7 @@ export default class NotificacionAgendamientoController {
             <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Error - Silueta Chic</title>
+              <title>Error - ${empresa}</title>
               <style>
                 body {
                   font-family: Arial, sans-serif;

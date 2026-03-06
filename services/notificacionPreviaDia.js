@@ -29,7 +29,7 @@ async function enviarCorreoRecordatorio({ email, nombrePaciente, apellidoPacient
     }
 
     const fromEmail = CORREO_RECEPTOR;
-    const fromName = NOMBRE_EMPRESA || "SiluetaChic";
+    const fromName = NOMBRE_EMPRESA || "Clinica";
 
     if (!fromEmail) {
         console.warn("[RECORDATORIO] CORREO_RECEPTOR no configurado. Correo no enviado.");
@@ -108,7 +108,7 @@ async function enviarCorreoRecordatorio({ email, nombrePaciente, apellidoPacient
         <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; margin-top: 20px;">
           <p style="margin: 0; color: #374151;">
             Atentamente,<br>
-            <b style="color: #667eea;">Silueta Chic</b>
+            <b style="color: #667eea;">${fromName}</b>
           </p>
         </div>
       </div>
@@ -124,7 +124,7 @@ async function enviarCorreoRecordatorio({ email, nombrePaciente, apellidoPacient
   `;
 
     const text = `
-Recordatorio de cita - Silueta Chic
+Recordatorio de cita - ${fromName}
 
 Estimado/a ${nombrePaciente} ${apellidoPaciente || ''}:
 
@@ -139,7 +139,7 @@ Le solicitamos, por favor, no olvidar asistir a su cita en el horario indicado. 
 Quedamos atentos/as ante cualquier consulta o confirmación.
 
 Atentamente,
-Silueta Chic
+${fromName}
   `;
 
     const payload = {
